@@ -46,7 +46,9 @@ int main()
 
 {
 
-	int x;	if ((in=fopen("mingju.txt","a+"))==NULL)
+	int x;
+	
+	if ((in=fopen("mingju.txt","a+"))==NULL)
 
 	{
 
@@ -60,7 +62,7 @@ int main()
 
 	  a[i][0]=(char*)malloc(20*sizeof(char));
 
-      a[i][1]=(char*)malloc(20*sizeof(char));
+          a[i][1]=(char*)malloc(20*sizeof(char));
 
 	}
 
@@ -84,21 +86,21 @@ int main()
 
 	printf_shouye();
   
-  while ((c=getchar())!='\n');
+        while ((c=getchar())!='\n');
 
 	while (1){
 
 	    qingping();
+	    
+            printf_1234_0();
 
-    	printf_1234_0();
-
-    	zhiling();
+            zhiling();
 
 	}
 
 	//printf("%d", n); 
 
-    fclose(in);
+        fclose(in);
 
 	return 0;
 
@@ -194,13 +196,13 @@ void printf_shouye()
 
 {
 
-	printf("欢迎使用诗词名句小典\n");	printf("本案实现以下功能\n\n");
+	printf("欢迎使用诗词名句小典\n");	
+	
+	printf("本案实现以下功能\n\n");
 
 	printf("1 查询某句的全句\n");
 
 	printf("  如输入 “明日复明日” 或 “明日何其多” ，均输出\n  明日复明日  明日何其多\n  如输入 “明日” ，则输出\n  明日复明日  明日何其多\n  今朝有酒今朝醉  明日愁来明日愁\n");
-
-	
 
 	printf("2 查看随机的名句\n");
 
@@ -212,7 +214,7 @@ void printf_shouye()
 
 	printf("4 添加缺少的名句\n");
 
-printf("  本典有限，不断添加完善\n\n");
+        printf("  本典有限，不断添加完善\n\n");
 
 	printf("回车开始\n");
 
@@ -222,7 +224,9 @@ void qingping()
 
 {
 
-	system("clear");}
+	system("clear");
+
+}
 
 void zhiling()
 
@@ -258,7 +262,7 @@ void chaxun()
 
 	qingping();
 
-    printf("请输入所要查询\n");
+        printf("请输入所要查询\n");
 
 	int l=0;
 
@@ -274,25 +278,23 @@ void chaxun()
 
 		    printf("%s %s\n",a[i][0],a[i][1]);
 
-        }
+               }
 
 	}
 
 	if (l==0){
 
-printf("\n\n\n");
+            printf("\n\n\n");
 
-printf("未找到所要查询，可能是因为\n");
+            printf("未找到所要查询，可能是因为\n");
 
-printf("1 本典内容有限，未能包含\n");
+            printf("1 本典内容有限，未能包含\n");
 
-printf("2 输入有错别字，查询失败\n");
+            printf("2 输入有错别字，查询失败\n");
 
-printf("3 该句太过常见，不必查询\n");
+            printf("3 该句太过常见，不必查询\n");
 
-	}
-
-	printf("\n");
+        }
 
 	printf_1234_1();
 

@@ -1,0 +1,151 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<conio.h>
+#include<time.h>
+#define qingping system("clear")
+#define N 20
+#define T 'o'
+#define S 'c'
+void printf_shouye();
+void printf_a();
+void getxy();
+void gettou();
+void getchi();
+void printf_kaishi();
+void die();
+void zanting();
+void run();
+void zhiling();
+int i, j, k, l, m, n, xx, yy;
+int x[N * N], y[N * N], sn = -1;
+char c,cc;
+char a[N][N];
+int main() {
+  srand(time(NULL));
+  for (i = 0; i < N; i++)
+    for (j = 0; j < N; j++)
+      a[i][j] = ' ';
+  for (i = 0; i < N; i++)
+    a[0][i] = a[i][0] = a[N - 1][i] = a[i][N - 1] = '^';
+  printf_shouye();
+  printf_kaishi();
+  sleep(1);
+  zhiling();
+  return 0;
+}
+
+void printf_shouye() {
+  printf("欢迎使用\n");
+  printf("\n回车开始\n");
+  while (getch() != '\n');
+}
+
+void printf_a() {
+  for (i = 0; i < N; i++) {
+    for (j = 0; j < N; j++) {
+      printf("%2c", a[i][j]);
+    }
+    printf("\n");
+  }
+}
+
+void getxy() {
+  xx = rand() % (N - 2) + 1;
+  yy = rand() % (N - 2) + 1;
+  for (i = 0; i <= sn; i++)
+    if (a[xx][yy]!=' ')
+      getxy();
+}
+
+void gettou() {
+  getxy();
+  a[xx][yy] = T;
+  sn++;
+  x[sn] = xx, y[sn] = yy;
+}
+
+void getchi() {
+  getxy();
+  a[xx][yy] = '+';
+}
+
+void printf_kaishi() {
+  gettou();
+  getchi();
+  gotoxy(0, 0);
+  printf_a();
+}
+
+void die() {
+  qingping;
+  gotoxy(8, 9);
+  printf("Game over!\n");
+  gotoxy(8, 10);
+  printf("your score:%d", sn);
+  gotoxy(8, 11);
+}
+
+void zanting() {
+	m=0,n=0;
+	zhiling();
+}
+
+void run() {
+  switch (a[x[sn] + m][y[sn] + n]) {
+  case S:
+  case '^':
+    l = -1;
+    die();
+    return;
+  case '+':
+    x[sn + 1] = x[sn] + m, y[sn + 1] = y[sn] + n;
+    a[x[sn]][y[sn]] = S;
+    sn++;
+    a[x[sn]][y[sn]] = T;
+    getchi();
+    break;
+  case ' ':
+    a[x[0]][y[0]] = ' ';
+    for (i = 0; i <= sn - 1; i++)
+      x[i] = x[i + 1], y[i] = y[i + 1];
+    if (sn)
+      a[x[sn - 1]][y[sn - 1]] = S;
+    x[sn] = x[sn] + m, y[sn] = y[sn] + n;
+    a[x[sn]][y[sn]] = T;
+    break;
+  }
+  gotoxy(0, 0);
+  printf_a();
+}
+
+void zhiling() {
+  while (l != -1) {
+    if (kbhit()) {
+    	cc=c;
+    	c=getch();
+    	if (cc+c=='4'+'6'){
+    		c=cc;
+    	    continue;
+    	}
+      switch (c) {
+      case '2':
+        m = -1, n = 0;
+        break;
+      case '4':
+        m = 0, n = -1;
+        break;
+      case '6':
+        m = 0, n = 1;
+        break;
+      case '8':
+        m = 1, n = 0;
+        break;
+      case '5':
+        zanting();
+        return;
+      }
+    }
+    usleep(300000);
+    run();
+  }
+}
